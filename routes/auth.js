@@ -2,27 +2,18 @@
  * @swagger
  * components: 
  *  schemas:
- *    RegUser:
+ *    RegAuth:
  *      type: object
  *      required:
- *        - name
  *        - email
- *        - birth
  *        - pass
  *      properties:
- *        name:
- *          type: string
- *          description: Name of the user
  *        email:
  *          type:  string
  *          description: Email of the user
- *        birth:
- *          type: string
- *          format: date
- *          description: The birthday of the user
  *        pass:
  *          type: string
- *          descirption: The password of the user
+ *          description: The password of the user
  *    RespToken:
  *      type: object
  *      required:
@@ -35,13 +26,22 @@
  *        token:
  *          type: string
  *          description: The token
+ *        apikey:
+ *          type: string
+ *          description: The api key
  * tags:
- *  name: Register User
- *  description: The register of a user in the API
- * /api/v1/register:
- *  get:
- *    summary: register an user
- *    tags: [Register Users]
+ *  name: Auth User
+ *  description: The authorization of a user in the API
+ * /api/v1/auth:
+ *  post:
+ *    summary: auth user
+ *    tags: [Auth User]
+ *    requestBody:
+ *      require: true
+ *      content: 
+ *          application/json:
+ *              schema:
+ *                  $ref: '#/components/schemas/RegAuth'
  *    responses:
  *      200:
  *        content:
@@ -134,6 +134,7 @@ router.post(
         res.status(200).json({
             status: 'success',
             token: token,
+            apikey: resultGetLog.rows[0].public
         })
     } catch (error) {
         client.query('ROLLBACK');

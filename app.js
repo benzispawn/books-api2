@@ -14,6 +14,7 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const registerRouter = require('./routes/register');
 const authRouter = require('./routes/auth');
+const { guard } = require('./middleware/guard');
 
 const options = require('./configs/optSwagger').options;
 
@@ -29,6 +30,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs, { explorer: true }));
 app.use(startConn);
+app.use(guard);
 app.use('/api/v1', indexRouter);
 app.use('/api/v1/users', usersRouter.router);
 app.use('/api/v1/register', registerRouter);

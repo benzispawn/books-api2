@@ -14,7 +14,6 @@ const validate = validations => {
             }
         }
 
-        console.log('@@@ o que temos dentro do validate', validations[0].builder);
         await Promise.all(validations.map(validation => validation.run(req)));
 
         const errors = validationResult(req);

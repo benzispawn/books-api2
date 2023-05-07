@@ -22,7 +22,7 @@
  *          description: The birthday of the user
  *        pass:
  *          type: string
- *          descirption: The password of the user
+ *          description: The password of the user
  *    RespToken:
  *      type: object
  *      required:
@@ -35,13 +35,22 @@
  *        token:
  *          type: string
  *          description: The token
+ *        apikey:
+ *          type: string
+ *          description: The api key
  * tags:
  *  name: Register User
  *  description: The register of a user in the API
  * /api/v1/register:
- *  get:
+ *  post:
  *    summary: register an user
- *    tags: [Register Users]
+ *    tags: [Register User]
+ *    requestBody:
+ *      require: true
+ *      content: 
+ *          application/json:
+ *              schema:
+ *                  $ref: '#/components/schemas/RegUser'
  *    responses:
  *      200:
  *        content:
@@ -104,7 +113,8 @@ router.post(
 
     res.json({
       "status": "success",
-      "token": token
+      "token": token,
+      "apikey": resultGetLog.rows[0].public
     });
   } catch (error) {
     client.query('ROLLBACK');

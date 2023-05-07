@@ -89,7 +89,8 @@ var queries = require('../queries/clients/all');
 router.get('/', async function(req, res, next) {
 
   const client = await res.databasePool.connect();
-  const resultado = await client.query(queries.all);
+  let all = queries.all();
+  const resultado = await client.query(all);
   // console.log(resultado.rows[0])
   client.release();
 
@@ -102,8 +103,9 @@ router.get('/', async function(req, res, next) {
 router.get('/:id', async function(req, res, next) {
 
   const client = await res.databasePool.connect();
-  queries.byId.values.push(req.params?.id);
-  const resultado = await client.query(queries.byId);
+  let byId = queries.byId();
+  byId.values.push(req.params?.id);
+  const resultado = await client.query(byId);
 
   console.log(resultado)
   
