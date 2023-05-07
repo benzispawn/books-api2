@@ -1,0 +1,37 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "title": "",
+      "description": "",
+      "version": "1.0"
+    },
+    "produces": ["application/json"],
+    "host": "localhost:3000",
+    "basePath": "/api/v1",
+    "paths": {
+      "/test": {
+        "get": {
+          "x-swagger-router-controller": "test",
+          "operationId": "swagTest",
+          "tags": ["/test"],
+          "description": "",
+          "parameters": [
+
+          ],
+          "responses": {}
+        }        
+      },
+      "/users": {
+        "get": {
+          "x-swagger-router-controller": "test",
+          "operationId": "router",
+          "tags": ["/users"],
+          "description": "",
+          "parameters": [
+
+          ],
+          "responses": {}
+        }        
+      }
+    }
+ }
