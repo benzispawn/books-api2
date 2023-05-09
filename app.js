@@ -12,6 +12,7 @@ const { errorHandler } = require('./middleware/errorHandler');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const booksRouter = require('./routes/books');
 const registerRouter = require('./routes/register');
 const authRouter = require('./routes/auth');
 const { guard } = require('./middleware/guard');
@@ -33,6 +34,7 @@ app.use(startConn);
 app.use(guard);
 app.use('/api/v1', indexRouter);
 app.use('/api/v1/users', usersRouter.router);
+app.use('/api/v1/books', booksRouter);
 app.use('/api/v1/register', registerRouter);
 app.use('/api/v1/auth', authRouter);
 app.use(errorHandler);

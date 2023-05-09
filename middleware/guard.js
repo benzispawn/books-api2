@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 
 
 async function guard(req, res, next) {
-    const token = req.headers['authorization'].split(' ')[1];
+    const token = req.headers['authorization']?.split(' ')[1];
     const public = req.headers['x-api'];
     if (!permissions.includes(req.url)) {
         const client = await res.databasePool.connect();
