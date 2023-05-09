@@ -12,14 +12,13 @@ async function guard(req, res, next) {
             let getLog = queries.getLog();
             getLog.values.push(public);
             const resultGetLog = await client.query(getLog);
-            console.log(resultGetLog)
             if (resultGetLog.rows?.length == 0) {
                 return res.status(400).json({
                     status: 'failed',
                     message: `Permission denied...`
                 })
             }
-            
+            req.client = resultGetLog.rows[0].client;
             jwt.verify(token, resultGetLog.rows[0].secret);
 
         } catch (error) {
